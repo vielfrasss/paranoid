@@ -1,0 +1,3 @@
+400	CHANNEL_PRIVATE	<class 'pyrogram.api.functions.channels.leave_channel.LeaveChannel'>
+400	CHANNEL_PRIVATE	<class 'pyrogram.api.functions.channels.leave_channel.LeaveChannel'>
+400	CHANNEL_PRIVATE	<class 'pyrogram.api.functions.updates.get_channel_difference.GetChannelDifference'>
