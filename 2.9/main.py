@@ -1,45 +1,38 @@
 from pyrogram import Client
 from pyrogram.api import functions
 import config
-import threading
+
 id=config.api_id
 hash=config.api_hash
 proxy=config.proxy
 app = Client(session_name="example" , api_id=id ,api_hash=hash,proxy=proxy)
 from getch import getch, pause
 import os
-import time
 forever=0
 global words
 words=""
 global word
 word=""
 print ('набираемое сообщение:')
-def inmess(us):
-	while forever< 1 :
-		print(app.get_history(us,0,1))
-		time.sleep(2)
 def catcher(us):
 	global words
-	while forever < 1 :
+	os.system('clear')
+	print ('набираемое сообщение:', words)
+
+	key = getch()
+
+	if ord(key) == 13:
+		print( "enter")
+		app.send_message(us,words) 
+		words = ""
+	elif ord(key) == 127:
 		
-		#os.system('clear')
+		words=words[:-1]
 		print ('набираемое сообщение:', words)
-
-		key = getch()
-
-		if ord(key) == 13:
-			print( "enter")
-			app.send_message(us,words) 
-			words = ""
-		elif ord(key) == 127:
+	else :
 		
-			words=words[:-1]
-			print ('набираемое сообщение:', words)
-		else :
-		
-			words =word+ key
-			print ('набираемое сообщение:', words)
+		words =word+ key
+		print ('набираемое сообщение:', words)
 	
 	
 
@@ -55,18 +48,12 @@ else :
     smguser=int(smsuser)  
 print(app.get_history(smguser,0,1))
 #print(app.get_chat(smguser))
-us=smguser
+print(smguser)
 
-out_thread = threading.Thread(target=catcher(us))
-
-my_thread = threading.Thread(target=inmess(smguser))
-my_thread.start()
-out_thread.start()
-
-
-
-
-#catcher(us)
+while forever < 1 :
+	word=words
+	us=smguser
+	catcher(us)
     #smgtext=input("message: ")
     #print(smgtext)
     #app.send_message(smguser,smgtext)
